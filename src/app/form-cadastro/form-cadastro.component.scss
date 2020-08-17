@@ -1,0 +1,25 @@
+$btn: #000;
+
+.borda-form{
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0px;
+}
+
+.btn-black{
+  background-color: $btn;
+  color: white;
+}
+
+.icone-senha{
+
+}
+
+.olho-aberto{
+  background-color: red;
+}
+
+.olho-fechado{
+  background-color: saddlebrown;
+}
