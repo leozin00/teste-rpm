@@ -1,0 +1,13 @@
+.logo-local{
+  @media (max-width: 768px ){
+    margin-right: 0px !important;
+  }
+
+}
+
+.tamanho-menu{
+  @media (max-width: 768px) {
+    height: min-content;
+
+  }
+}

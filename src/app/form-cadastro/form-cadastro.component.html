@@ -1,0 +1,185 @@
+<div class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="../../assets/imagens/fotoBanner.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+<p class="text-center my-2 h4"><b>CADASTRE-SE E PARTICIPE</b></p>
+<div class="container">
+  <form [formGroup]="pessoaisForm">
+
+    <div class="mt-5">
+
+      <p class="h6"><b>INFORMAÇÕES PESSOAIS</b></p>
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-5">
+            <label for="cpf" class="h6">CPF*</label>
+            <input matInput class="form-control borda-form border-dark" type="text" name="cpf" id="cpf" formControlName="cpf" required mask="000.000.000-00" placeholder="000.000.000-00"/>
+            <app-aviso-input [atributo]="cpf" [texto]="'CPF'"></app-aviso-input>
+
+        </div>
+        <div class="form-group col-md-7">
+          <label for="nome" class="h6">Nome Completo*</label>
+          <input class="form-control borda-form border-dark" type="text" name="nome" id="nome" formControlName="nome" required placeholder="Exemplo: Leonardo Vieira de Vasconcelos"/>
+          <app-aviso-input [atributo]="nome" [texto]="'Nome Completo'"></app-aviso-input>
+        </div>
+      </div>
+
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-6">
+            <label for="email" class="h6">E-mail*</label>
+            <input class="form-control borda-form border-dark" type="email" name="email" id="email" formControlName="email" required placeholder="exemplo@gmail.com"/>
+            <app-aviso-input [atributo]="email" [texto]="'E-mail'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="confirmarEmail" class="h6">Confirmar E-mail*</label>
+          <input class="form-control borda-form border-dark" type="email" name="confirmarEmail" id="confirmarEmail" formControlName="confirmarEmail" onpaste="return false" ondrop="return false" required/>
+          <app-aviso-input [atributo]="confirmarEmail" [texto]="'Confirmar E-mail'"></app-aviso-input>
+        </div>
+      </div>
+
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-4">
+          <label for="nascimento" class="h6">Data de Nascimento*</label>
+          <input class="form-control borda-form border-dark" type="text" name="nascimento" id="nascimento" formControlName="nascimento" required mask="00/00/0000" placeholder="00/00/0000"/>
+          <app-aviso-input [atributo]="nascimento" [texto]="'Data de Nascimento'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="celular" class="h6">Celular*</label>
+          <input class="form-control borda-form border-dark" type="text" name="celular" id="celular" formControlName="celular" required mask="(00) 00000-0000" placeholder="(00) 00000-0000"/>
+          <app-aviso-input [atributo]="celular" [texto]="'Celular'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="outroTelefone" class="h6">Outro telefone</label>
+          <input class="form-control borda-form border-dark" type="text" name="outroTelefone" id="outroTelefone" formControlName="outroTelefone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="12"/>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group col-md-7">
+          <label for="genero" class="h6">Genero*</label>
+          <select class="form-control borda-form border-dark" name="genero" id="genero" formControlName="genero" required>
+            <option *ngFor="let genero of generos" [value]="genero">{{genero}}</option>
+
+          </select>
+          <app-aviso-input [atributo]="genero" [texto]="'Genero'"></app-aviso-input>
+        </div>
+      </div>
+
+    </div>
+  </form>
+  <form [formGroup]="enderecoForm">
+    <div class="mt-5">
+      <p class="h6"><b>INFORMAÇÕES RESIDENCIAIS</b></p>
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-5">
+            <label for="cep" class="h6">CEP*</label>
+            <input class="form-control borda-form border-dark" type="text" name="cep" id="cep" formControlName="cep" required (change)="buscarCEP($event.target.value)" mask="00000-000" placeholder="00000-000"/>
+            <app-aviso-input [atributo]="cep" [texto]="'CEP'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-7">
+          <label for="endereco" class="h6">Endereço*</label>
+          <input class="form-control borda-form border-dark" type="text" name="endereco" id="endereco" formControlName="endereco" required placeholder="Rua/Avenida/Travessa"/>
+          <app-aviso-input [atributo]="endereco" [texto]="'Endereço'"></app-aviso-input>
+        </div>
+      </div>
+
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-4">
+            <label for="numero" class="h6">Número*</label>
+            <input class="form-control borda-form border-dark" type="text" name="numero" id="numero" formControlName="numero" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required placeholder="0000"/>
+            <app-aviso-input [atributo]="numero" [texto]="'Número'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="complemento" class="h6">Complemento</label>
+          <input class="form-control borda-form border-dark" type="text" name="complemento" id="complemento" formControlName="complemento"/>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="bairro" class="h6">Bairro*</label>
+          <input class="form-control borda-form border-dark" type="text" name="bairro" id="bairro" formControlName="bairro" required/>
+          <app-aviso-input [atributo]="bairro" [texto]="'Bairro'"></app-aviso-input>
+        </div>
+      </div>
+
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-5">
+          <label for="cidade" class="h6">Cidade*</label>
+          <input class="form-control borda-form border-dark" type="text" name="cidade" id="cidade" formControlName="cidade" required/>
+          <app-aviso-input [atributo]="cidade" [texto]="'Cidade'"></app-aviso-input>
+        </div>
+        <div class="form-group col-md-7">
+          <label for="estado" class="h6">UF*</label>
+          <select class="form-control borda-form border-dark" name="estado" id="estado" formControlName="estado" required>
+            <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+          </select>
+          <app-aviso-input [atributo]="estado" [texto]="'UF'"></app-aviso-input>
+        </div>
+      </div>
+
+    </div>
+  </form>
+  <form [formGroup]="segurancaForm">
+    <div class="mt-5">
+      <p class="h6"><b>SENHA (MÍNIMO DE 8 CARACTERES)</b></p>
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-6">
+          <label for="senha" class="h6">Senha*</label>
+          <div class="input-group">
+            <input class="form-control borda-form border-dark" type="password" name="senha" id="senha" formControlName="senha" required #se/>
+            <button class="btn input-group-prepend mx-2 bg-white"  (click)="mostrarSenha(olhoSenha, se)">
+              <img src="../../assets/imagens/olho-aberto.png" alt="" height="25px" #olhoSenha>
+            </button>
+          </div>
+          <app-aviso-input [atributo]="senha" [texto]="'Senha'"></app-aviso-input>
+
+        </div>
+        <div class="form-group col-md-6">
+          <label for="repitaSenha" class="h6">Repita sua senha*</label>
+          <div class="input-group">
+            <input class="form-control borda-form border-dark" type="password" name="repitaSenha" id="repitaSenha" formControlName="repitaSenha" onpaste="return false" ondrop="return false" required #se2/>
+            <button class="btn input-group-prepend mx-2 bg-white" (click)="mostrarSenha(olhoRepitaSenha, se2)">
+              <img src="../../assets/imagens/olho-aberto.png" alt="" height="25px" #olhoRepitaSenha>
+            </button>
+          </div>
+          <app-aviso-input [atributo]="repitaSenha" [texto]="'Repita Senha'"></app-aviso-input>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row justify-content-center">
+      <div class="col-md-6 justify-content-center mb-2">
+        <p>Clique na caixa abaixo para prosseguir*</p>
+        <re-captcha (resolved)="resolved($event)"
+              formControlName="recaptchaReactive"
+              siteKey="6LdG9b4ZAAAAAPUOs9OPA_1w1r0mEaXZvIu3gb_j" required>
+        </re-captcha>
+      </div>
+      <div class="col-md-6 mb-2">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="mensagens" id="mensagens" formControlName="mensagens">
+          <label for="mensagens">ACEITO RECEBER MENSAGENS DA PROMOÇÃO</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="termos" id="termos" formControlName="termos" required>
+          <label for="termos">LI E CONCORDO COM OS <u>TERMOS DE REGULAMENTO</u> DESTA PROMOÇÃO*</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row justify-content-center my-3">
+      <button class="btn btn-black" (click)="onSubmit()" [disabled]="!enderecoForm.valid || !segurancaForm.valid || !pessoaisForm.valid">Avançar</button>
+    </div>
+  </form>
+
+
+
+</div>

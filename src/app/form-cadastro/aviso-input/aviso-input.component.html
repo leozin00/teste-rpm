@@ -1,0 +1,5 @@
+<mat-hint *ngIf="atributo.invalid && (atributo.dirty || atributo.touched)">
+  <mat-error *ngIf="atributo.errors.required">
+    Por favor preencha o campo {{texto}}.
+  </mat-error>
+</mat-hint>
